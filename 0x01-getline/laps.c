@@ -53,5 +53,5 @@ void race_state(int *id, size_t size) {
 
 	printf("Race state:\n");
 	for (check_car = head; check_car != NULL; check_car = check_car->next)
-		printf("Car %d [%lu laps] \n", check_car->id, check_car->laps);
+		printf("Car %d [%lu laps]\n", check_car->id, check_car->laps);
 }
