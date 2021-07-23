@@ -1,0 +1,8 @@
+
+
+
+
+
+
+car_t *check_car, *new_car;
+    size_t i;
