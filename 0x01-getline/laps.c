@@ -10,6 +10,7 @@ void race_state(int *id, size_t size) {
 	static car_t *head;
 	car_t *check_car;
 	car_t *new_car;
+	car_t *print_car;
 	size_t i;
 
 
@@ -53,6 +54,6 @@ void race_state(int *id, size_t size) {
 	}
 
 	printf("Race state:\n");
-	for (check_car = head; check_car != NULL; check_car = check_car->next)
-		printf("Car %d [%lu laps]\n", check_car->id, check_car->laps);
+	for (print_car = head; print_car != NULL; print_car = print_car->next)
+		printf("Car %d [%lu laps]\n", print_car->id, print_car->laps);
 }
