@@ -18,6 +18,7 @@ void race_state(int *id, size_t size) {
 			check_car = head;
 			head = head->next;
 			free(check_car);
+			free(head);
 		}
 		return;
 	}
@@ -39,6 +40,7 @@ void race_state(int *id, size_t size) {
 		if (head == NULL && check_car == head) {
 			new_car->next = head;
 			new_car->id = id[i];
+			new_car->laps = 0;
 			head = new_car;
 		}
 		else {            
