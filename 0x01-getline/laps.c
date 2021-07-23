@@ -18,7 +18,6 @@ void race_state(int *id, size_t size) {
 			check_car = head;
 			head = head->next;
 			free(check_car);
-			free(head);
 		}
 		return;
 	}
