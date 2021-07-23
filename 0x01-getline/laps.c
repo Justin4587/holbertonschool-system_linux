@@ -5,7 +5,8 @@
 * @size: num of cars
 */
 
-void race_state(int *id, size_t size) {
+void race_state(int *id, size_t size)
+{
 
 	static car_t *head;
 	car_t *check_car;
@@ -14,8 +15,10 @@ void race_state(int *id, size_t size) {
 	size_t i;
 
 
-	if (size == 0) {
-		while (head != NULL) {
+	if (size == 0)
+	{
+		while (head != NULL)
+		{
 			check_car = head;
 			head = head->next;
 			free(check_car);
@@ -24,26 +27,30 @@ void race_state(int *id, size_t size) {
 	}
 
 
-	for (i = 0; i < size; i++) {
+	for (i = 0; i < size; i++)
+	{
 		check_car = head;
 
 		while (check_car && check_car->next && check_car->next->id <= id[i])
 			check_car = check_car->next;
 
-		if (check_car && check_car->id  == id[i]) {
+		if (check_car && check_car->id  == id[i])
+		{
 			check_car->laps++;
 			continue;
 		}
 
 		new_car = malloc(sizeof(car_t));
-		
-		if (head == NULL && check_car == head) {
+
+		if (head == NULL && check_car == head)
+		{
 			new_car->next = head;
 			new_car->id = id[i];
 			new_car->laps = 0;
 			head = new_car;
 		}
-		else {            
+		else
+		{
 		new_car->id = id[i];
 		new_car->laps = 0;
 		new_car->next = check_car->next;
