@@ -1,4 +1,5 @@
 #include "_getline.h"
+#include <stdio.h>
 /**
 * _getline - function for stuff
 * @fd: id
@@ -10,25 +11,29 @@ char *_getline(const int fd)
     static fd_t *head;
     fd_t *copy = NULL;
 
-    copy = head;
-
-    while (copy && copy->structed_fd != fd)
-        copy = copy->next;
-
-    if (!copy)
-        head = file_stuffer(&head, fd);
     if (fd == -1)
         return(NULL);
 
-    while (copy && copy->structed_fd != fd)
+    copy = file_stuffer(&head, fd);
+    
+
+
+    while (copy && copy->structed_fd <= fd)
         copy = copy->next;
+    printf("%i", fd);
+    /*
+    *if (fd <= copy->structed_fd)
+    *    head->structed_fd = fd;
+    */
+    if (fd == -1)
+        return(NULL);
 
     if (copy && copy->structed_fd == fd)
     {
         return (the_line(copy->file_buf, copy->line_index, copy->bytes_read));
     }
-    else
-        return (NULL);
+    
+    return (NULL);
 
 }
 
@@ -80,7 +85,7 @@ char *the_line(char *file_buffer, size_t line_index, size_t bytes_read)
 fd_t *file_stuffer(fd_t **head, const int fd)
 {
     char *buffer;
-    fd_t *add;
+    fd_t *add, *neat;
     size_t buffer_read;
     size_t total_read = 0;
 
@@ -99,17 +104,30 @@ fd_t *file_stuffer(fd_t **head, const int fd)
     }
 
     buffer_read = read(fd, buffer, READ_SIZE);
-    while (buffer_read == READ_SIZE)
+    printf("%lu", buffer_read);
+    printf("%i", READ_SIZE);
+    while (buffer_read)
     {
         total_read = total_read + READ_SIZE;
+        printf("%s", buffer);
         buffer = realloc(buffer, total_read + READ_SIZE);
+        printf("%lu", buffer_read);
         buffer_read = read(fd, buffer + total_read, READ_SIZE);
     } 
-
+    printf("FUCK^^^^^^");
     add->file_buf = buffer;
     add->bytes_read = total_read;
-
     
+    if (*head)
+    {
+        neat = *head;
+        while (neat && neat->next)
+            neat = neat->next;
+        neat->next = add;
+    }
+    else
+        *head = add;
+
     return(*head);
 
 
