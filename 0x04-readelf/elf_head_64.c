@@ -12,6 +12,8 @@ int elf_head_64(FILE *elfie)
     fread(&header, sizeof(header), 1, elfie);
     fseek(elfie, header.e_phoff, SEEK_SET);
     printf("ELF Stuff?:");
+    printf("%i\n", header.e_machine);
+
 
     return (0);
 }
